@@ -1,5 +1,19 @@
 #include "Game.h"
 
+void Game::initSounds()
+{
+	// "C:\Users\lacer\OneDrive\Área de Trabalho\repos\SFML-PONG\SFML-PONG\sound1.wav"
+	audioBuffer1.loadFromFile("sound1.wav");
+	audio1.setBuffer(audioBuffer1);
+	
+	audioBuffer2.loadFromFile("wall.wav");
+	audio2.setBuffer(audioBuffer2);
+
+	audioBuffer3.loadFromFile("point.wav");
+	audio3.setBuffer(audioBuffer3);
+
+}
+
 void Game::initText()
 {
 // "C:\Users\lacer\OneDrive\Área de Trabalho\repos\SFML-PONG\SFML-PONG\font.ttf"
@@ -66,6 +80,7 @@ Game::Game()
 	initWindow();
 	initVariables();
 	initText();
+	initSounds();
 	initPlayer();
 	initBall();
 	player1win();
@@ -115,6 +130,7 @@ void Game::updateCollision()
 			moveX = 12;
 		moverX = moveX * direcao;  
 		moveY = player->speed2 * player->direcao ; 
+		audio1.play();
 	}
 
 	if (ball->getBounds().left <= player->getBounds1().left + 30
@@ -127,11 +143,13 @@ void Game::updateCollision()
 		direcao = 1;
 		moverX = moveX * direcao;
 		moveY = player->speed1 * player->direcao;
+		audio1.play();
 	}
 
 	if (ball->getBounds().top <= 0 || ball->getBounds().top >= 600)
 	{
 		moveY *= -1;
+		audio2.play();
 	}
 
 	if (ball->getBounds().left <= 0)
@@ -142,6 +160,8 @@ void Game::updateCollision()
 		moveY = 0;
 		moverX = moveX;
 		points2++;
+		audio3.play();
+
 	}
 	if (ball->getBounds().left >= 800)
 	{
@@ -151,6 +171,7 @@ void Game::updateCollision()
 		moveY = 0;
 		moverX = moveX;
 		points1++;
+		audio3.play();
 	}
 
 }

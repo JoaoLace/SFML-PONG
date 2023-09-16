@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 #include <sstream>
 #include "Players.h"
@@ -9,6 +10,16 @@ class Game {
 private:
 	sf::RenderWindow* window;
 	
+	
+	sf::SoundBuffer audioBuffer1;
+	sf::Sound audio1;
+	sf::SoundBuffer audioBuffer2;
+	sf::Sound audio2;
+	sf::SoundBuffer audioBuffer3;
+	sf::Sound audio3;
+
+	void initSounds();
+
 	float moveX, moveY,moverX;
 
 	sf::Text over1;
